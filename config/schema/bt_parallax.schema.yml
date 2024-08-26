@@ -1,0 +1,24 @@
+bt_parallax.settings:
+  type: config_object
+  label: 'Bootstrap Toolbox Parallax settings'
+  mapping:
+    text_field:
+      type: string
+      label: 'Text field'
+      description: 'The field from which to pull text for the parallax effect.'
+    image_style:
+      type: string
+      label: 'Image style'
+      description: 'The image style to apply to the background image in the parallax effect.'
+    tag:
+      type: string
+      label: 'HTML tag'
+      description: 'The HTML tag to wrap the text in.'
+    text_length:
+      type: integer
+      label: 'Text length'
+      description: 'The maximum number of characters to display from the text field.'
+    text_style:
+      type: string
+      label: 'Text style'
+      description: 'The style to apply to the text (CSS classes or other styling).'

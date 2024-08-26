@@ -1,0 +1,19 @@
+.parallax-section .parallax-element {
+  padding-top: 200px;
+  padding-bottom: 200px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  background-attachment: fixed;
+  background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+.parallax-section .parallax-title {
+  color: #ffffff;
+  text-align: center;
+  font-size: calc(1.875rem + 1.5vw);
+}

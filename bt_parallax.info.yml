@@ -1,0 +1,9 @@
+name: 'Bootstrap Toolbox Parallax'
+type: module
+description: 'Provide Parallax Formatters'
+package: 'Bootstrap Toolbox'
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:ckeditor5
+  - drupal:media
+  - drupal:bootstrap_toolbox

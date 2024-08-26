@@ -1,0 +1,14 @@
+bt_parallax_image:
+  version: 1.x
+  css:
+    theme:
+      css/bt-parallax-image.css: {}
+  js:
+    js/bt-parallax-image.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/once
+
+
+

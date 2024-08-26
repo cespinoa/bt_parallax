@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Bootstrap Toolbox Parallax module.
+ */
+ 
+/**
+ * Implements hook_theme().
+ */
+function bt_parallax_theme($existing, $type, $theme, $path) {
+  return [
+    'bt_parallax_image' => [
+      'variables' => [
+        'image_url' => NULL,
+        'text' => NULL,
+        'classes' => NULL,
+        'tag' => NULL,
+      ],
+    ],
+  ];
+}
+
+
+
+
