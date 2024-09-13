@@ -67,7 +67,7 @@ class ParallaxImageFormatter extends FormatterBase {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritdoc} 
    */
   public function settingsForm(array $form, FormStateInterface $formState) {
     $form = parent::settingsForm($form, $formState);
@@ -78,7 +78,12 @@ class ParallaxImageFormatter extends FormatterBase {
 
     $entityType = $this->fieldDefinition->getTargetEntityTypeId();
     $bundle = $this->fieldDefinition->getTargetBundle();
-    $textFields = $this->utilityService->getBundleFields($entityType, $bundle, ['string', 'text', 'text_with_summary' ]);
+
+    $textFields = [];
+    if($entityType && $bundle){
+      $textFields = $this->utilityService->getBundleFields($entityType, $bundle, ['string', 'text', 'text_with_summary' ]);  
+    }
+    
 
     $tagsStyles = $this->utilityService->getTagStyles();
     
@@ -161,6 +166,12 @@ class ParallaxImageFormatter extends FormatterBase {
    *   A renderable array.
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
+
+
+    /**
+     * Falta aplicar los estilos de Bootstrap Tooolbox
+     * */
+    
     $elements = [];
     $settings = $this->getSettings();
     $textField = $settings['text_field'];
@@ -176,8 +187,11 @@ class ParallaxImageFormatter extends FormatterBase {
       if ($parentEntity->hasField($textField)) {
         $textValue = $parentEntity->get($textField)->value;
       }
+      if($parentEntity->getEntityTypeId() == 'block_content' && $texfield == 'info'){
+        $textValue = $parentEntity->label();
+      }
       if($textLength){
-        $textValue = text_summary($textValue, NULL, $textLength);
+        $textValue = text_summary($textValue ?? '', NULL, $textLength);
       }
       if($settings['text_style']){
         $classes = $this->utilityService->getStyleById($settings['text_style']);
@@ -188,7 +202,7 @@ class ParallaxImageFormatter extends FormatterBase {
       $elements[$delta] = [
         '#theme' => 'bt_parallax_image',
         '#image_url' => $imageUrl,
-        '#text' => $this->utilityService->createMarkup($textValue),
+        '#text' => $textValue ? $this->utilityService->createMarkup($textValue) : '',
         '#classes' =>  $classes,
         '#tag' => $tag,
         '#attached' => [
