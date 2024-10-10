@@ -136,8 +136,13 @@ class ParallaxImageFormatter extends FormatterBase {
 
     $entityType = $this->fieldDefinition->getTargetEntityTypeId();
     $bundle = $this->fieldDefinition->getTargetBundle();
-    $textFields = $this->utilityService->getBundleFields($entityType, $bundle, ['string', 'text', 'text_with_summary' ]);
-    $textField = $textFields[$settings['text_field']];
+    if ($bundle){
+      $textFields = $this->utilityService->getBundleFields($entityType, $bundle, ['string', 'text', 'text_with_summary' ]);
+      $textField = $textFields[$settings['text_field']];
+    }
+    else {
+      $textField = '';
+    }
     
     $tagsStyles = $this->utilityService->getTagStyles();
     $tagStyle = $tagsStyles[$settings['tag']];
@@ -178,16 +183,17 @@ class ParallaxImageFormatter extends FormatterBase {
     $textLength = $settings['text_length'];
     $imageStyle = $settings['image_style'];
     $tag = $settings['tag'];
-
+    
     $parentEntity = $items->getEntity();
     
     foreach ($items as $delta => $item) {
+      $textValue = '';
       $mediaId = $item->target_id;
       $imageUrl = $this->utilityService->getMediaUrlByMediaIdAndImageStyle($mediaId,$imageStyle);
       if ($parentEntity->hasField($textField)) {
         $textValue = $parentEntity->get($textField)->value;
       }
-      if($parentEntity->getEntityTypeId() == 'block_content' && $texfield == 'info'){
+      if($parentEntity->getEntityTypeId() == 'block_content' && $textField == 'info'){
         $textValue = $parentEntity->label();
       }
       if($textLength){
